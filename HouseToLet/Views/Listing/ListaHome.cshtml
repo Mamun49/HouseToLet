@@ -1,0 +1,176 @@
+﻿@model HouseToLet.Models.PageModel
+
+
+
+@{
+    ViewBag.Title = "List Your Home";
+    // <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+}
+
+<h2>List Your Home</h2>
+
+
+@using (Html.BeginForm("ListaHome", "Listing", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Insert Home Info</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.houseinfo.UserId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.houseinfo.UserId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.houseinfo.UserId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.houseinfo.Category, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.houseinfo.Category, new SelectList(ViewBag.list, "Value", "Text"), "Select Category", new { @class = "form-control" })
+                @*@Html.EditorFor(model => model.Category, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.ValidationMessageFor(model => model.houseinfo.Category, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.houseinfo.Size, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.houseinfo.Size, new { htmlAttributes = new { @class = "form-control" } })   <label for="length_feet">Squere Feet</label>
+
+                @Html.ValidationMessageFor(model => model.houseinfo.Size, "", new { @class = "text-danger" })
+                <div class="col-md-2">
+
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.houseinfo.Beds, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.houseinfo.Beds, new SelectList(ViewBag.Bed, "Value", "Text"), "Number of Bedrooms", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.houseinfo.Beds, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.houseinfo.Baths, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.houseinfo.Baths, new SelectList(ViewBag.Bath, "Value", "Text"), "Number of Bathrooms", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.houseinfo.Baths, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.houseinfo.Garage, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.houseinfo.Garage, new SelectList(ViewBag.Gar, "Value", "Text"), "Select Garage", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.houseinfo.Garage, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.houseinfo.DisplayImage, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*<input multiple type="file" name="ImageFile">*@
+                <input id="DisplayImage" multiple="multiple" type="file" name="ImageFile" />
+
+            </div>
+        </div>
+
+        @if (ViewBag.StateList != null)
+        {
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.houseinfo.State, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.houseinfo.State, ViewBag.StateList as SelectList, "Select Category", new { @class = "form-control", id = "SId" })
+                    @Html.ValidationMessageFor(model => model.houseinfo.State, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.houseinfo.City, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.houseinfo.City, new SelectList(" "), "Select Category", new { @class = "form-control", id = "CId" })
+                    @Html.ValidationMessageFor(model => model.houseinfo.City, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        <div class="form-group">
+            @Html.LabelFor(model => model.houseinfo.Rent, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.houseinfo.Rent, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.houseinfo.Rent, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.houseinfo.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.houseinfo.Address, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.houseinfo.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.houseinfo.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.houseinfo.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.houseinfo.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @*<script src="~/Scripts/jquery-3.4.1.min.js"></script>*@
+
+    <script>
+        $(document).ready(function () {
+            $("#SId").change(function () {
+                var SId = $(this).val();
+                //debugger
+                $.ajax({
+                    type: "Post",
+                    url: "/Listing/GetCityList?SId=" + SId,
+                    contentType: "html",
+
+                    success: function (response) {
+                        //debugger
+                        $("#CId").empty();
+                        $("#CId").append('<option value="'
+                            + '">'
+                            + "--Select City--" + '</option>');
+                        $.each(response, function (i, memo) {
+
+                            $("#CId").append('<option value="'
+                                + memo.Value + '">'
+                                + memo.Text + '</option>');
+                        });
+
+                    }
+                })
+            })
+        });
+    </script>
+
+
+
+
+
+
+}

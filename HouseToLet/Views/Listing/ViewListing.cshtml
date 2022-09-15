@@ -1,0 +1,110 @@
+﻿@model IEnumerable<HouseToLet.Models.HouseInfo>
+
+@{
+    ViewBag.Title = "ViewListing";
+}
+
+<h2>ViewListing</h2>
+
+<p>
+    @Html.ActionLink("Create New", "ListaHome")
+</p>
+<p>
+
+
+    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Blog.." title="Blog Title">
+
+</p>
+<table class="table" id="myTable">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Size)
+        </th>
+
+
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Beds)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Baths)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Garage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rent)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Size)
+            </td>
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Beds)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Baths)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Garage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rent)
+            </td>
+            <td>
+
+
+                <a href="@Url.Action("EditListing","Listing",new { HomeId=item.HomeId})">Edit</a> |
+                <a href="@Url.Action("DeleteListing","Listing",new { HomeId=item.HomeId})">Delete</a>
+            </td>
+        </tr>
+    }
+
+    <script>
+        function myFunction() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+
+</table>
